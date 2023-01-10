@@ -11,7 +11,7 @@ async def validated_price(mes, now_price):
         num = re.findall(r'\d+', mes)
         if not num:
             return 0
-    num = int(num[0])
+    num = float(num[0])
     if mes.count('%'):
         num = round(now_price * (num / 100), 2)
         if not mes.count('+') and not mes.count('-'):
@@ -20,7 +20,7 @@ async def validated_price(mes, now_price):
         return num + now_price
     if mes.count('-'):
         return now_price - num
-    return num
+    return round(num, 2)
 
 
 async def add_user_waiting(user_id, pairs_id, message):
